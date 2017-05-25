@@ -7,6 +7,17 @@ module.exports = {
     },
     //an object with a loader section (which is an array)
     module: {
+        // preloaders run before loaders, such as checking files for linting errors
+        // Had to change name from preLoaders in tutorial to rules as below, due to webpack 2 i believe
+        rules: [
+            {
+                // enforce key is part of rules?  tells it to run 'pre' or before, guess this replaces preloaders
+                enforce: 'pre',
+                test: /\.js$/,
+                exclude: /node_modules/,
+                loader: 'jshint-loader'
+            }
+        ],
         // loaders is an array and each is represented by an object
         loaders: [
             {
@@ -20,8 +31,13 @@ module.exports = {
         ]
     },
     // resolve is a section that specifies what kind of file types we can process without specifically giving them a file extension
+    // for instance, in app.js require('./login') was originally ./login.js
     resolve: {
         //this is looking for anything starting with login (as in the app.js require) that ends in .js or .es6
+        // tutorial originally had a '' as the first element in the array but there was an error when running webpack-dev-server
+        // re: the empty string in the first element, FYI
         extensions: ['.js', '.es6']
-    }
-}
+    },
+
+    watch: true
+};
