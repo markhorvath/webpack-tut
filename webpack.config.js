@@ -1,10 +1,20 @@
 var path = require('path');
 
+//webpack and commonsPlugin are part of how you do multiple bundle files
+var webpack = require('webpack');
+
+var commonsPlugin = new webpack.optimize.CommonsChunkPlugin('shared.js');
+
 module.exports = {
     //sets a relative root directory for the entry key
     context: path.resolve('js'),
     //name of the top level file or set of files to include in build
-    entry: ["./utils", "./app"],
+    entry: {
+        //this is an example of how you would do multiple bundle files
+        about: './about_page.js',
+        home: './home_page.js',
+        contact: './contact_page.js'
+    },
     //an object that can have a few keys, in this case it's bundle.js
     output: {
         //as above, tells where to put the bundle.js file, in this case build (which i think is the root) /js
@@ -15,8 +25,11 @@ module.exports = {
         //are actually going to be requested thru the web-server from public/assets/js, so whenever a request comes
         //in for public/assets/js/whatever, it'll look for that file inside the build/js directory
         publicPath: '/public/assets/js',
-        filename: "bundle.js"
+        //[name] will match the name in of the entry project, so in this example it's about home or contact
+        filename: "[name].js"
     },
+
+    plugins: [commonsPlugin],
     //key that tells web-server that when someone requests index.html from the root, it needs to look in public dir
     devServer: {
         //name of the directory to use as it's base directory
