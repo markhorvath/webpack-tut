@@ -33,11 +33,9 @@ module.exports = {
     // resolve is a section that specifies what kind of file types we can process without specifically giving them a file extension
     // for instance, in app.js require('./login') was originally ./login.js
     resolve: {
-        //this is looking for anything starting with login (as in the app.js require) that ends in .js or .es6
+        //this is looking for anything starting with login (BECAUSE ITS 'require' IN app.js *I THINK*) that ends in .js or .es6
         // tutorial originally had a '' as the first element in the array but there was an error when running webpack-dev-server
         // re: the empty string in the first element, FYI
         extensions: ['.js', '.es6']
-    },
-
-    watch: true
+    }
 };

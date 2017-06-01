@@ -4,8 +4,6 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    // Can just use npm to create scripts for various scenarios in development, here replaced the default 'test' with
-    // 'start: webpack-dev-server' instead of typing webpack-dev-server everytime
     "start": "webpack-dev-server"
   },
   "author": "",
@@ -17,6 +15,7 @@
     "jshint": "^2.9.4",
     "jshint-loader": "^0.8.3",
     "node-libs-browser": "^2.0.0",
+    "strip-loader": "^0.1.2",
     "webpack": "^2.2.0-rc.3"
   }
 }
